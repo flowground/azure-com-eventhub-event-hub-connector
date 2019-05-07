@@ -1,0 +1,185 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "eventHubName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource definition",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Single item in List or Get Event Hub operation",
+            "properties": {
+                "properties": {
+                    "description": "Properties supplied to the Create Or Update Event Hub operation.",
+                    "properties": {
+                        "captureDescription": {
+                            "description": "Properties of capture description",
+                            "properties": {
+                                "destination": {
+                                    "description": "Properties of Destination where capture will be stored. (Storage Account, Blob Names)",
+                                    "properties": {
+                                        "name": {
+                                            "description": "Name for capture destination",
+                                            "type": "string"
+                                        },
+                                        "properties": {
+                                            "description": "Properties describing the storage account, blob container and archive name format for capture destination",
+                                            "properties": {
+                                                "archiveNameFormat": {
+                                                    "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order",
+                                                    "type": "string"
+                                                },
+                                                "blobContainer": {
+                                                    "description": "Blob container Name",
+                                                    "type": "string"
+                                                },
+                                                "storageAccountResourceId": {
+                                                    "description": "Resource id of the storage account to be used to create the blobs",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "x-ms-client-flatten": true
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "enabled": {
+                                    "description": "A value that indicates whether capture description is enabled. ",
+                                    "type": "boolean"
+                                },
+                                "encoding": {
+                                    "description": "Enumerates the possible values for the encoding format of capture description. Note: 'AvroDeflate' will be deprecated in New API Version",
+                                    "enum": [
+                                        "Avro",
+                                        "AvroDeflate"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "EncodingCaptureDescription"
+                                    }
+                                },
+                                "intervalInSeconds": {
+                                    "description": "The time window allows you to set the frequency with which the capture to Azure Blobs will happen, value should between 60 to 900 seconds",
+                                    "format": "int32",
+                                    "maximum": 900,
+                                    "minimum": 60,
+                                    "type": "integer"
+                                },
+                                "sizeLimitInBytes": {
+                                    "description": "The size window defines the amount of data built up in your Event Hub before an capture operation, value should be between 10485760 to 524288000 bytes",
+                                    "format": "int32",
+                                    "maximum": 524288000,
+                                    "minimum": 10485760,
+                                    "type": "integer"
+                                },
+                                "skipEmptyArchives": {
+                                    "description": "A value that indicates whether to Skip Empty Archives",
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "createdAt": {
+                            "description": "Exact time the Event Hub was created.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "messageRetentionInDays": {
+                            "description": "Number of days to retain the events for this Event Hub, value should be 1 to 7 days",
+                            "format": "int64",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "partitionCount": {
+                            "description": "Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions.",
+                            "format": "int64",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "partitionIds": {
+                            "description": "Current number of shards on the Event Hub.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "readOnly": true,
+                            "type": "array"
+                        },
+                        "status": {
+                            "description": "Enumerates the possible values for the status of the Event Hub.",
+                            "enum": [
+                                "Active",
+                                "Disabled",
+                                "Restoring",
+                                "SendDisabled",
+                                "ReceiveDisabled",
+                                "Creating",
+                                "Deleting",
+                                "Renaming",
+                                "Unknown"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "EntityStatus"
+                            }
+                        },
+                        "updatedAt": {
+                            "description": "The exact time the message was updated.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-client-flatten": true
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

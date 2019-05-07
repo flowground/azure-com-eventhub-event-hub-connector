@@ -1,0 +1,174 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+        },
+        "namespaceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "required": [
+                "location"
+            ],
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "The Resource definition",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource Id",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "x-ms-azure-resource": true,
+                            "type": "object"
+                        }
+                    ],
+                    "description": "Definition of Resource",
+                    "properties": {
+                        "location": {
+                            "description": "Resource location",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags",
+                            "type": "object",
+                            "x-ms-mutability": [
+                                "read",
+                                "create",
+                                "update"
+                            ]
+                        }
+                    },
+                    "type": "object"
+                }
+            ],
+            "description": "Single Namespace item in List or Get Operation",
+            "properties": {
+                "properties": {
+                    "description": "Namespace properties supplied for create namespace operation.",
+                    "properties": {
+                        "createdAt": {
+                            "description": "The time the Namespace was created.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "isAutoInflateEnabled": {
+                            "description": "Value that indicates whether AutoInflate is enabled for eventhub namespace.",
+                            "type": "boolean"
+                        },
+                        "kafkaEnabled": {
+                            "description": "Value that indicates whether Kafka is enabled for eventhub namespace.",
+                            "type": "boolean"
+                        },
+                        "maximumThroughputUnits": {
+                            "description": "Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)",
+                            "format": "int32",
+                            "maximum": 20,
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "metricId": {
+                            "description": "Identifier for Azure Insights metrics.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state of the Namespace.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "serviceBusEndpoint": {
+                            "description": "Endpoint you can use to perform Service Bus operations.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "updatedAt": {
+                            "description": "The time the Namespace was updated.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "x-ms-client-flatten": true
+                },
+                "sku": {
+                    "description": "Properties of sku resource",
+                    "properties": {
+                        "capacity": {
+                            "description": "The Event Hubs throughput units, value should be 0 to 20 throughput units.",
+                            "format": "int32",
+                            "maximum": 20,
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "name": {
+                            "description": "Name of this SKU.",
+                            "enum": [
+                                "Basic",
+                                "Standard"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "SkuName"
+                            }
+                        },
+                        "tier": {
+                            "description": "The billing tier of this particular SKU.",
+                            "enum": [
+                                "Basic",
+                                "Standard"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "SkuTier"
+                            }
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

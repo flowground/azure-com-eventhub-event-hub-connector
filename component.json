@@ -1,0 +1,730 @@
+{
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/eventhub-EventHub/2017-04-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available Event Hub REST API operations.",
+            "description": "Lists all of the available Event Hub REST API operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_CheckNameAvailability": {
+            "main": "./lib/actions/Namespaces_CheckNameAvailability.js",
+            "title": "Check the give Namespace name availability.",
+            "description": "Check the give Namespace name availability.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_CheckNameAvailability.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_List": {
+            "main": "./lib/actions/Namespaces_List.js",
+            "title": "Lists all the available Namespaces within a subscription, irrespective of the resource groups.",
+            "description": "Lists all the available Namespaces within a subscription, irrespective of the resource groups.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Regions_ListBySku": {
+            "main": "./lib/actions/Regions_ListBySku.js",
+            "title": "Gets the available Regions for a given sku",
+            "description": "Gets the available Regions for a given sku",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Regions_ListBySku.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_ListByResourceGroup": {
+            "main": "./lib/actions/Namespaces_ListByResourceGroup.js",
+            "title": "Lists the available Namespaces within a resource group.",
+            "description": "Lists the available Namespaces within a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_Delete": {
+            "main": "./lib/actions/Namespaces_Delete.js",
+            "title": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
+            "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_Get": {
+            "main": "./lib/actions/Namespaces_Get.js",
+            "title": "Gets the description of the specified namespace.",
+            "description": "Gets the description of the specified namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_Update": {
+            "main": "./lib/actions/Namespaces_Update.js",
+            "title": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+            "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_CreateOrUpdate": {
+            "main": "./lib/actions/Namespaces_CreateOrUpdate.js",
+            "title": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+            "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_ListAuthorizationRules": {
+            "main": "./lib/actions/Namespaces_ListAuthorizationRules.js",
+            "title": "Gets a list of authorization rules for a Namespace.",
+            "description": "Gets a list of authorization rules for a Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_ListAuthorizationRules.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_DeleteAuthorizationRule": {
+            "main": "./lib/actions/Namespaces_DeleteAuthorizationRule.js",
+            "title": "Deletes an AuthorizationRule for a Namespace.",
+            "description": "Deletes an AuthorizationRule for a Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_DeleteAuthorizationRule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_GetAuthorizationRule": {
+            "main": "./lib/actions/Namespaces_GetAuthorizationRule.js",
+            "title": "Gets an AuthorizationRule for a Namespace by rule name.",
+            "description": "Gets an AuthorizationRule for a Namespace by rule name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_GetAuthorizationRule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_CreateOrUpdateAuthorizationRule": {
+            "main": "./lib/actions/Namespaces_CreateOrUpdateAuthorizationRule.js",
+            "title": "Creates or updates an AuthorizationRule for a Namespace.",
+            "description": "Creates or updates an AuthorizationRule for a Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_CreateOrUpdateAuthorizationRule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_ListKeys": {
+            "main": "./lib/actions/Namespaces_ListKeys.js",
+            "title": "Gets the primary and secondary connection strings for the Namespace.",
+            "description": "Gets the primary and secondary connection strings for the Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_ListKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_RegenerateKeys": {
+            "main": "./lib/actions/Namespaces_RegenerateKeys.js",
+            "title": "Regenerates the primary or secondary connection strings for the specified Namespace.",
+            "description": "Regenerates the primary or secondary connection strings for the specified Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_RegenerateKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_List": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_List.js",
+            "title": "Gets all Alias(Disaster Recovery configurations)",
+            "description": "Gets all Alias(Disaster Recovery configurations)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_CheckNameAvailability": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_CheckNameAvailability.js",
+            "title": "Check the give Namespace name availability.",
+            "description": "Check the give Namespace name availability.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_CheckNameAvailability.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_Delete": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_Delete.js",
+            "title": "Deletes an Alias(Disaster Recovery configuration)",
+            "description": "Deletes an Alias(Disaster Recovery configuration)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_Get": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_Get.js",
+            "title": "Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace",
+            "description": "Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_CreateOrUpdate": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_CreateOrUpdate.js",
+            "title": "Creates or updates a new Alias(Disaster Recovery configuration)",
+            "description": "Creates or updates a new Alias(Disaster Recovery configuration)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_ListAuthorizationRules": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_ListAuthorizationRules.js",
+            "title": "Gets a list of authorization rules for a Namespace.",
+            "description": "Gets a list of authorization rules for a Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_ListAuthorizationRules.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_GetAuthorizationRule": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_GetAuthorizationRule.js",
+            "title": "Gets an AuthorizationRule for a Namespace by rule name.",
+            "description": "Gets an AuthorizationRule for a Namespace by rule name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_GetAuthorizationRule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_ListKeys": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_ListKeys.js",
+            "title": "Gets the primary and secondary connection strings for the Namespace.",
+            "description": "Gets the primary and secondary connection strings for the Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_ListKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_BreakPairing": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_BreakPairing.js",
+            "title": "This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces",
+            "description": "This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_BreakPairing.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DisasterRecoveryConfigs_FailOver": {
+            "main": "./lib/actions/DisasterRecoveryConfigs_FailOver.js",
+            "title": "Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
+            "description": "Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DisasterRecoveryConfigs_FailOver.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_ListByNamespace": {
+            "main": "./lib/actions/EventHubs_ListByNamespace.js",
+            "title": "Gets all the Event Hubs in a Namespace.",
+            "description": "Gets all the Event Hubs in a Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_ListByNamespace.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_Delete": {
+            "main": "./lib/actions/EventHubs_Delete.js",
+            "title": "Deletes an Event Hub from the specified Namespace and resource group.",
+            "description": "Deletes an Event Hub from the specified Namespace and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_Get": {
+            "main": "./lib/actions/EventHubs_Get.js",
+            "title": "Gets an Event Hubs description for the specified Event Hub.",
+            "description": "Gets an Event Hubs description for the specified Event Hub.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_CreateOrUpdate": {
+            "main": "./lib/actions/EventHubs_CreateOrUpdate.js",
+            "title": "Creates or updates a new Event Hub as a nested resource within a Namespace.",
+            "description": "Creates or updates a new Event Hub as a nested resource within a Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_ListAuthorizationRules": {
+            "main": "./lib/actions/EventHubs_ListAuthorizationRules.js",
+            "title": "Gets the authorization rules for an Event Hub.",
+            "description": "Gets the authorization rules for an Event Hub.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_ListAuthorizationRules.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_DeleteAuthorizationRule": {
+            "main": "./lib/actions/EventHubs_DeleteAuthorizationRule.js",
+            "title": "Deletes an Event Hub AuthorizationRule.",
+            "description": "Deletes an Event Hub AuthorizationRule.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_DeleteAuthorizationRule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_GetAuthorizationRule": {
+            "main": "./lib/actions/EventHubs_GetAuthorizationRule.js",
+            "title": "Gets an AuthorizationRule for an Event Hub by rule name.",
+            "description": "Gets an AuthorizationRule for an Event Hub by rule name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_GetAuthorizationRule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_CreateOrUpdateAuthorizationRule": {
+            "main": "./lib/actions/EventHubs_CreateOrUpdateAuthorizationRule.js",
+            "title": "Creates or updates an AuthorizationRule for the specified Event Hub.",
+            "description": "Creates or updates an AuthorizationRule for the specified Event Hub.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_CreateOrUpdateAuthorizationRule.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_ListKeys": {
+            "main": "./lib/actions/EventHubs_ListKeys.js",
+            "title": "Gets the ACS and SAS connection strings for the Event Hub.",
+            "description": "Gets the ACS and SAS connection strings for the Event Hub.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_ListKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventHubs_RegenerateKeys": {
+            "main": "./lib/actions/EventHubs_RegenerateKeys.js",
+            "title": "Regenerates the ACS and SAS connection strings for the Event Hub.",
+            "description": "Regenerates the ACS and SAS connection strings for the Event Hub.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventHubs_RegenerateKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ConsumerGroups_ListByEventHub": {
+            "main": "./lib/actions/ConsumerGroups_ListByEventHub.js",
+            "title": "Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.",
+            "description": "Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ConsumerGroups_ListByEventHub.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ConsumerGroups_Delete": {
+            "main": "./lib/actions/ConsumerGroups_Delete.js",
+            "title": "Deletes a consumer group from the specified Event Hub and resource group.",
+            "description": "Deletes a consumer group from the specified Event Hub and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ConsumerGroups_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ConsumerGroups_Get": {
+            "main": "./lib/actions/ConsumerGroups_Get.js",
+            "title": "Gets a description for the specified consumer group.",
+            "description": "Gets a description for the specified consumer group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ConsumerGroups_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ConsumerGroups_CreateOrUpdate": {
+            "main": "./lib/actions/ConsumerGroups_CreateOrUpdate.js",
+            "title": "Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.",
+            "description": "Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ConsumerGroups_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Namespaces_GetMessagingPlan": {
+            "main": "./lib/actions/Namespaces_GetMessagingPlan.js",
+            "title": "Gets messaging plan for specified namespace.",
+            "description": "Gets messaging plan for specified namespace.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Namespaces_GetMessagingPlan.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
